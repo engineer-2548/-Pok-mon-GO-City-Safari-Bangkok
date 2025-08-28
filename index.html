@@ -1,87 +1,240 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Healthy City Run 2025</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-</head>
-<body class="bg-gradient-to-r from-green-200 to-blue-200 dark:from-gray-900 dark:to-gray-800 transition-all duration-500">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>วิ่งล้อมเมือง Healthy City | ยานนาวา × บางคอแหลม</title>
 
-  <!-- Toggle Theme -->
-  <div class="flex justify-end p-4">
-    <button id="toggleTheme" class="px-4 py-2 bg-gray-800 text-white dark:bg-yellow-300 dark:text-black rounded-full shadow-md">
-      🌙 / ☀️ Toggle
-    </button>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind config: Thai-friendly font stack
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans Thai"', 'Sarabun', 'Kanit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Preload Thai fonts (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <meta name="description" content="กิจกรรมวิ่งล้อมเมือง Healthy City เขตยานนาวา × เขตบางคอแหลม | วันอาทิตย์ที่ 21 กันยายน 2568 เวลา 04:30 น. | สวนเฉลิมพระเกียรติ 6 รอบ พระราม 3" />
+  <meta property="og:title" content="วิ่งล้อมเมือง Healthy City" />
+  <meta property="og:description" content="ฟรี! เลือกวิ่ง 3/5/10 กม. | เปิดลงทะเบียน 1 ก.ย. 2568 เวลา 09:00 น. (ยังไม่มีลิงก์ลงทะเบียน)" />
+  <meta property="og:image" content="https://lh5.googleusercontent.com/d/1AbrWKE_QQPaATBoTYorLCB-JTrm_l_r2" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#16a34a" />
+  <style>
+    /* subtle animated blobs background */
+    .blob {
+      filter: blur(30px);
+      opacity: .35;
+      animation: float 18s ease-in-out infinite;
+    }
+    .blob-2 { animation-duration: 22s; }
+    .blob-3 { animation-duration: 26s; }
+    @keyframes float {
+      0%,100% { transform: translateY(0) translateX(0) scale(1); }
+      25% { transform: translateY(-20px) translateX(10px) scale(1.05);}
+      50% { transform: translateY(10px) translateX(-10px) scale(0.97);}
+      75% { transform: translateY(-10px) translateX(6px) scale(1.03);}
+    }
+  </style>
+</head>
+
+<body class="font-sans bg-gradient-to-br from-emerald-50 via-sky-50 to-white dark:from-gray-950 dark:via-gray-900 dark:to-black text-gray-900 dark:text-gray-100 transition-colors duration-500">
+  <!-- Theme bootstrap (load saved theme before paint) -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  <!-- Decorative animated blobs -->
+  <div aria-hidden="true" class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="blob absolute -top-20 -left-10 h-72 w-72 bg-emerald-400 dark:bg-emerald-700 rounded-full mix-blend-multiply dark:mix-blend-normal"></div>
+    <div class="blob blob-2 absolute top-40 -right-16 h-72 w-72 bg-sky-400 dark:bg-sky-700 rounded-full mix-blend-multiply dark:mix-blend-normal"></div>
+    <div class="blob blob-3 absolute bottom-20 left-1/4 h-72 w-72 bg-amber-300 dark:bg-amber-600 rounded-full mix-blend-multiply dark:mix-blend-normal"></div>
   </div>
 
-  <!-- Header -->
-  <header class="text-center p-6">
-    <h1 id="typedText" class="text-3xl md:text-5xl font-extrabold text-green-800 dark:text-yellow-400"></h1>
-    <p class="mt-2 text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300">"เขตยานนาวา X เขตบางคอแหลม"</p>
+  <!-- Header / Nav -->
+  <header class="max-w-5xl mx-auto px-4 pt-6 pb-2 flex items-center justify-between">
+    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight">
+      วิ่งล้อมเมือง <span class="text-emerald-600 dark:text-emerald-400">Healthy City</span>
+    </h1>
+    <button id="themeToggle"
+      class="rounded-full px-4 py-2 text-sm font-semibold bg-gray-900 text-white dark:bg-yellow-300 dark:text-gray-900 shadow hover:scale-105 active:scale-95 transition">
+      🌙/☀️ โหมดสี
+    </button>
   </header>
 
-  <!-- Image -->
-  <div class="flex justify-center">
-    <img src="https://lh5.googleusercontent.com/d/1AbrWKE_QQPaATBoTYorLCB-JTrm_l_r2" 
-         alt="ประชาสัมพันธ์กิจกรรม" 
-         class="rounded-2xl shadow-lg w-11/12 md:w-2/3 hover:scale-105 transition-transform duration-500">
-  </div>
+  <!-- Hero -->
+  <section class="max-w-5xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 gap-6 items-center">
+      <div class="order-2 md:order-1">
+        <h2 class="text-3xl md:text-5xl font-extrabold leading-tight">
+          “เขตยานนาวา × เขตบางคอแหลม”
+        </h2>
+        <p class="mt-3 text-lg md:text-xl">
+          วันอาทิตย์ที่ <b>21 กันยายน 2568</b> ตั้งแต่เวลา <b>04:30 น.</b><br/>
+          📍 <b>สวนเฉลิมพระเกียรติ 6 รอบ พระราม 3</b>
+        </p>
+        <div class="mt-4 space-y-1">
+          <p class="text-emerald-700 dark:text-emerald-300 font-semibold">💥 ฟรี! ไม่มีค่าใช้จ่าย</p>
+          <p>🎯 เส้นทางวิ่งตามความฟิต: 3 กม. · 5 กม. · 10 กม.</p>
+        </div>
 
-  <!-- Details -->
-  <section class="max-w-3xl mx-auto mt-8 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-2xl shadow-lg">
-    <h2 class="text-2xl font-bold text-center text-blue-800 dark:text-yellow-300">📅 วันอาทิตย์ที่ 21 กันยายน 2568</h2>
-    <p class="text-center text-gray-700 dark:text-gray-300">เริ่มเวลา 04.30 น. เป็นต้นไป</p>
-    <p class="text-center font-semibold text-green-700 dark:text-green-400 mt-2">📍 สวนเฉลิมพระเกียรติ 6 รอบ พระราม 3</p>
+        <!-- Countdown to 1 Sep 2025 09:00 (no link, just info) -->
+        <div class="mt-6 p-4 rounded-2xl bg-white/70 dark:bg-white/5 backdrop-blur shadow border border-emerald-200/60 dark:border-emerald-700/40">
+          <p class="font-bold mb-1">⏳ เปิดลงทะเบียน <span class="whitespace-nowrap">1 ก.ย. 2568 เวลา 09:00 น.</span></p>
+          <div id="countdown" class="text-2xl font-extrabold tracking-wider"></div>
+          <p class="text-sm mt-2 opacity-80">* ขณะนี้ยังไม่มีลิงก์ลงทะเบียน (ประชาสัมพันธ์เท่านั้น)</p>
+        </div>
 
-    <div class="mt-4 space-y-2 text-gray-800 dark:text-gray-200">
-      <p>💥 <b>ฟรี! ไม่มีค่าใช้จ่าย</b></p>
-      <p>🎯 เลือกเส้นทางวิ่งได้ตามความฟิต:</p>
-      <ul class="list-disc ml-6">
-        <li>3 กิโลเมตร</li>
-        <li>5 กิโลเมตร</li>
-        <li>10 กิโลเมตร</li>
-      </ul>
+        <!-- Action buttons (all real & safe) -->
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=%E0%B8%AA%E0%B8%A7%E0%B8%99%E0%B9%80%E0%B8%89%E0%B8%A5%E0%B8%B4%E0%B8%A1%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B8%A2%E0%B8%A3%E0%B8%95%E0%B8%B4+6+%E0%B8%A3%E0%B8%AD%E0%B8%9A+%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%A1+3"
+            target="_blank" rel="noopener"
+            class="inline-flex items-center gap-2 rounded-xl px-4 py-2 bg-emerald-600 text-white font-semibold shadow hover:bg-emerald-700 transition">
+            🗺️ เปิดแผนที่
+          </a>
+          <a
+            href="https://lh5.googleusercontent.com/d/1AbrWKE_QQPaATBoTYorLCB-JTrm_l_r2"
+            target="_blank" rel="noopener"
+            class="inline-flex items-center gap-2 rounded-xl px-4 py-2 bg-sky-600 text-white font-semibold shadow hover:bg-sky-700 transition">
+            🖼️ เปิด/ดาวน์โหลดภาพประกอบข่าว
+          </a>
+          <button id="icsBtn"
+            class="inline-flex items-center gap-2 rounded-xl px-4 py-2 bg-amber-500 text-white font-semibold shadow hover:bg-amber-600 transition">
+            📅 เพิ่มลงปฏิทิน (.ics)
+          </button>
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="order-1 md:order-2">
+        <figure class="relative group">
+          <img
+            src="https://lh5.googleusercontent.com/d/1AbrWKE_QQPaATBoTYorLCB-JTrm_l_r2"
+            alt="โปสเตอร์กิจกรรม วิ่งล้อมเมือง Healthy City ยานนาวา × บางคอแหลม"
+            class="w-full rounded-3xl shadow-xl ring-1 ring-black/5 dark:ring-white/10 transition-transform duration-500 group-hover:scale-[1.02]" />
+          <figcaption class="sr-only">ภาพประกอบข่าวกิจกรรม</figcaption>
+          <!-- floating badge -->
+          <div class="absolute -top-3 -left-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-xs font-bold px-3 py-1 rounded-full shadow">
+            Free • 3/5/10K
+          </div>
+        </figure>
+      </div>
     </div>
   </section>
 
-  <!-- Register -->
-  <section class="max-w-3xl mx-auto mt-8 text-center">
-    <h2 class="text-xl font-bold text-red-600 dark:text-red-400">📌 กติกาการเข้าร่วม</h2>
-    <ul class="text-gray-700 dark:text-gray-300 mt-2 space-y-2">
-      <li>🔸 ลงทะเบียนล่วงหน้า วันที่ <b>1 กันยายน 2568 เวลา 09.00 น.</b></li>
-      <li>🔸 ใส่เสื้อวิ่งลายใดก็ได้</li>
-      <li>🏃 ต้องการรับเสื้อที่ระลึก 👉 บริจาค 250 บาท ให้มูลนิธิ รพ.เจริญกรุงประชารักษ์</li>
-    </ul>
-    <a href="https://forms.gle/" target="_blank"
-       class="inline-block mt-4 px-6 py-3 bg-green-600 text-white font-bold rounded-full shadow-lg hover:bg-green-700 transition">
-      📝 ลงทะเบียนที่นี่
-    </a>
+  <!-- Rules -->
+  <section class="max-w-5xl mx-auto px-4 mt-10">
+    <div class="rounded-3xl p-6 md:p-8 bg-white/70 dark:bg-white/5 backdrop-blur border border-gray-200/60 dark:border-gray-700/40 shadow">
+      <h3 class="text-2xl md:text-3xl font-extrabold">กติกาการเข้าร่วม</h3>
+      <ul class="mt-4 space-y-2 leading-relaxed">
+        <li>🔸 ลงทะเบียนล่วงหน้าผ่าน Google Form <b>วันที่ 1 กันยายน 2568 ตั้งแต่เวลา 09:00 น.</b></li>
+        <li>🔸 ใส่เสื้อวิ่งลายใดก็ได้เข้าร่วม</li>
+        <li>🏃 หากประสงค์รับเสื้อที่ระลึก สามารถบริจาคเข้ามูลนิธิ รพ.เจริญกรุงประชารักษ์ <b>250 บาท</b></li>
+      </ul>
+      <p class="mt-3 text-sm opacity-80">หมายเหตุ: ยังไม่มีลิงก์ลงทะเบียน เผยแพร่เพื่อการประชาสัมพันธ์เท่านั้น</p>
+    </div>
+  </section>
+
+  <!-- Tags / Orgs -->
+  <section class="max-w-5xl mx-auto px-4 mt-8">
+    <div class="flex flex-wrap gap-2 text-sm">
+      <span class="px-3 py-1 rounded-full bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900">สํานักงานเขตยานนาวา</span>
+      <span class="px-3 py-1 rounded-full bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900">สํานักงานเขตบางคอแหลม</span>
+      <span class="px-3 py-1 rounded-full bg-emerald-700 text-white">#กรุงเทพมหานคร</span>
+      <span class="px-3 py-1 rounded-full bg-emerald-700 text-white">#สํานักการแพทย์</span>
+      <span class="px-3 py-1 rounded-full bg-emerald-700 text-white">#โรงพยาบาลเจริญกรุงประชารักษ์</span>
+      <span class="px-3 py-1 rounded-full bg-emerald-700 text-white">#53ปีรพจ</span>
+      <span class="px-3 py-1 rounded-full bg-emerald-700 text-white">#CKPMSD</span>
+    </div>
   </section>
 
   <!-- Footer -->
-  <footer class="mt-10 text-center text-sm text-gray-600 dark:text-gray-400 p-4">
-    <p>สํานักงานเขตยานนาวา | สํานักงานเขตบางคอแหลม</p>
-    <p>#53ปีรพจ #CKPMSD #โรงพยาบาลเจริญกรุงประชารักษ์</p>
-    <p>#กรุงเทพสุขภาพดีเชื่อมั่นสํานักการแพทย์ #กรุงเทพมหานคร</p>
+  <footer class="max-w-5xl mx-auto px-4 py-10">
+    <div class="text-xs opacity-70">
+      © 2025 Healthy City — Mobile-first • Contrast-safe • Accessible
+    </div>
   </footer>
 
-  <!-- Script -->
   <script>
-    // Typed Effect
-    var typed = new Typed("#typedText", {
-      strings: ["🏃 Healthy City Run 2025", "วิ่งล้อมเมือง", "เขตยานนาวา x เขตบางคอแหลม"],
-      typeSpeed: 60,
-      backSpeed: 40,
-      loop: true
+    // Theme toggle + persist
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const el = document.documentElement;
+      el.classList.toggle('dark');
+      localStorage.setItem('theme', el.classList.contains('dark') ? 'dark' : 'light');
     });
 
-    // Theme Toggle
-    const toggleBtn = document.getElementById("toggleTheme");
-    toggleBtn.addEventListener("click", () => {
-      document.documentElement.classList.toggle("dark");
+    // Countdown to Sep 1, 2025 09:00 GMT+7
+    const countdownEl = document.getElementById('countdown');
+    const target = new Date('2025-09-01T09:00:00+07:00').getTime();
+    function updateCountdown() {
+      const now = Date.now();
+      let diff = target - now;
+      if (diff <= 0) {
+        countdownEl.textContent = 'เปิดลงทะเบียนแล้ว (ยังไม่มีลิงก์อย่างเป็นทางการ)';
+        return;
+      }
+      const d = Math.floor(diff / (1000*60*60*24)); diff -= d*24*60*60*1000;
+      const h = Math.floor(diff / (1000*60*60)); diff -= h*60*60*1000;
+      const m = Math.floor(diff / (1000*60)); diff -= m*60*1000;
+      const s = Math.floor(diff / 1000);
+      countdownEl.textContent = `${d} วัน ${h} ชม. ${m} นาที ${s} วินาที`;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Generate ICS (Add to Calendar) - real downloadable file
+    document.getElementById('icsBtn').addEventListener('click', () => {
+      // Event: 21 Sep 2025 04:30–08:30 GMT+7 (approx)
+      const dtStartLocal = new Date('2025-09-21T04:30:00+07:00');
+      const dtEndLocal   = new Date('2025-09-21T08:30:00+07:00');
+      function toUTC(dt){ // format as YYYYMMDDTHHmmssZ
+        const pad = n => String(n).padStart(2,'0');
+        return `${dt.getUTCFullYear()}${pad(dt.getUTCMonth()+1)}${pad(dt.getUTCDate())}T${pad(dt.getUTCHours())}${pad(dt.getUTCMinutes())}${pad(dt.getUTCSeconds())}Z`;
+      }
+      const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Healthy City//TH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:${Date.now()}@healthy-city
+DTSTAMP:${toUTC(new Date())}
+DTSTART:${toUTC(dtStartLocal)}
+DTEND:${toUTC(dtEndLocal)}
+SUMMARY:วิ่งล้อมเมือง Healthy City (ยานนาวา × บางคอแหลม)
+LOCATION:สวนเฉลิมพระเกียรติ 6 รอบ พระราม 3
+DESCRIPTION:ฟรี! เลือกวิ่ง 3/5/10 กม.\\nเปิดลงทะเบียน 1 ก.ย. 2568 เวลา 09:00 น. (ยังไม่มีลิงก์)
+END:VEVENT
+END:VCALENDAR`;
+      const blob = new Blob([ics], {type: 'text/calendar'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Healthy-City-Run-2025.ics';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
     });
   </script>
 </body>
 </html>
+
