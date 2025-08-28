@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthy City Run 2025</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+</head>
+<body class="bg-gradient-to-r from-green-200 to-blue-200 dark:from-gray-900 dark:to-gray-800 transition-all duration-500">
+
+  <!-- Toggle Theme -->
+  <div class="flex justify-end p-4">
+    <button id="toggleTheme" class="px-4 py-2 bg-gray-800 text-white dark:bg-yellow-300 dark:text-black rounded-full shadow-md">
+      🌙 / ☀️ Toggle
+    </button>
+  </div>
+
+  <!-- Header -->
+  <header class="text-center p-6">
+    <h1 id="typedText" class="text-3xl md:text-5xl font-extrabold text-green-800 dark:text-yellow-400"></h1>
+    <p class="mt-2 text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300">"เขตยานนาวา X เขตบางคอแหลม"</p>
+  </header>
+
+  <!-- Image -->
+  <div class="flex justify-center">
+    <img src="https://lh5.googleusercontent.com/d/1AbrWKE_QQPaATBoTYorLCB-JTrm_l_r2" 
+         alt="ประชาสัมพันธ์กิจกรรม" 
+         class="rounded-2xl shadow-lg w-11/12 md:w-2/3 hover:scale-105 transition-transform duration-500">
+  </div>
+
+  <!-- Details -->
+  <section class="max-w-3xl mx-auto mt-8 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold text-center text-blue-800 dark:text-yellow-300">📅 วันอาทิตย์ที่ 21 กันยายน 2568</h2>
+    <p class="text-center text-gray-700 dark:text-gray-300">เริ่มเวลา 04.30 น. เป็นต้นไป</p>
+    <p class="text-center font-semibold text-green-700 dark:text-green-400 mt-2">📍 สวนเฉลิมพระเกียรติ 6 รอบ พระราม 3</p>
+
+    <div class="mt-4 space-y-2 text-gray-800 dark:text-gray-200">
+      <p>💥 <b>ฟรี! ไม่มีค่าใช้จ่าย</b></p>
+      <p>🎯 เลือกเส้นทางวิ่งได้ตามความฟิต:</p>
+      <ul class="list-disc ml-6">
+        <li>3 กิโลเมตร</li>
+        <li>5 กิโลเมตร</li>
+        <li>10 กิโลเมตร</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Register -->
+  <section class="max-w-3xl mx-auto mt-8 text-center">
+    <h2 class="text-xl font-bold text-red-600 dark:text-red-400">📌 กติกาการเข้าร่วม</h2>
+    <ul class="text-gray-700 dark:text-gray-300 mt-2 space-y-2">
+      <li>🔸 ลงทะเบียนล่วงหน้า วันที่ <b>1 กันยายน 2568 เวลา 09.00 น.</b></li>
+      <li>🔸 ใส่เสื้อวิ่งลายใดก็ได้</li>
+      <li>🏃 ต้องการรับเสื้อที่ระลึก 👉 บริจาค 250 บาท ให้มูลนิธิ รพ.เจริญกรุงประชารักษ์</li>
+    </ul>
+    <a href="https://forms.gle/" target="_blank"
+       class="inline-block mt-4 px-6 py-3 bg-green-600 text-white font-bold rounded-full shadow-lg hover:bg-green-700 transition">
+      📝 ลงทะเบียนที่นี่
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-10 text-center text-sm text-gray-600 dark:text-gray-400 p-4">
+    <p>สํานักงานเขตยานนาวา | สํานักงานเขตบางคอแหลม</p>
+    <p>#53ปีรพจ #CKPMSD #โรงพยาบาลเจริญกรุงประชารักษ์</p>
+    <p>#กรุงเทพสุขภาพดีเชื่อมั่นสํานักการแพทย์ #กรุงเทพมหานคร</p>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    // Typed Effect
+    var typed = new Typed("#typedText", {
+      strings: ["🏃 Healthy City Run 2025", "วิ่งล้อมเมือง", "เขตยานนาวา x เขตบางคอแหลม"],
+      typeSpeed: 60,
+      backSpeed: 40,
+      loop: true
+    });
+
+    // Theme Toggle
+    const toggleBtn = document.getElementById("toggleTheme");
+    toggleBtn.addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+    });
+  </script>
+</body>
+</html>
